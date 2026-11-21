@@ -5,6 +5,8 @@ One-page portfolio, hosted free on GitHub Pages.
 ```
 index.html        ← portfolio landing page
 tomato/index.html ← Project 1: Tomato focus timer
+notes/index.html  ← Project 2: Notable markdown notes app
+weather/index.html← Project 3: Skyline live weather dashboard
 README.md
 ```
 
