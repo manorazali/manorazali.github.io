@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tomato — Focus Timer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6efe4; --ink:#2a1d17; --muted:#8a7668; --line:#e3d6c4;
+    --accent:#d9472b; --card:#fffaf2;
+  }
+  body.short{ --accent:#2f8f6f; }
+  body.long { --accent:#3a63c4; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'JetBrains Mono',monospace; background:var(--bg); color:var(--ink);
+    min-height:100vh; display:flex; justify-content:center; padding:40px 18px;
+    transition:background .4s;
+  }
+  .wrap{width:100%;max-width:460px}
+  header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:28px}
+  h1{font-family:'Fraunces',serif;font-size:30px;font-weight:700;letter-spacing:-.5px}
+  h1 span{color:var(--accent);transition:color .4s}
+  .count{font-size:12px;color:var(--muted)}
+  .modes{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px}
+  .modes button{
+    flex:1;border:0;background:none;font:inherit;font-size:12px;padding:9px 0;border-radius:999px;
+    color:var(--muted);cursor:pointer;transition:all .25s
+  }
+  .modes button.on{background:var(--accent);color:#fff}
+  .dial{position:relative;width:280px;height:280px;margin:34px auto 26px}
+  .dial svg{width:100%;height:100%;transform:rotate(-90deg)}
+  .dial circle{fill:none;stroke-width:10}
+  .track{stroke:var(--line)}
+  .prog{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset .3s linear, stroke .4s}
+  .time{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  }
+  .time b{font-family:'Fraunces',serif;font-size:72px;font-weight:400;letter-spacing:-2px;font-variant-numeric:tabular-nums}
+  .time small{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-top:4px}
+  .controls{display:flex;justify-content:center;gap:12px;margin-bottom:38px}
+  .controls button{
+    font:inherit;font-size:13px;border:1px solid var(--line);background:var(--card);color:var(--ink);
+    padding:12px 20px;border-radius:12px;cursor:pointer;transition:transform .1s
+  }
+  .controls button:active{transform:scale(.96)}
+  .controls .main{background:var(--ink);color:var(--bg);border-color:var(--ink);min-width:130px;font-weight:600}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+  .panel h2{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:12px;font-weight:400}
+  form{display:flex;gap:8px;margin-bottom:10px}
+  form input{
+    flex:1;font:inherit;font-size:13px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;
+    background:var(--bg);color:var(--ink);outline:none
+  }
+  form input:focus{border-color:var(--accent)}
+  form button{font:inherit;border:0;background:var(--accent);color:#fff;border-radius:10px;padding:0 14px;cursor:pointer;font-size:18px}
+  ul{list-style:none}
+  li{display:flex;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px dashed var(--line);font-size:13px}
+  li:last-child{border-bottom:0}
+  li input{accent-color:var(--accent);width:16px;height:16px;cursor:pointer}
+  li span{flex:1;word-break:break-word}
+  li.done span{text-decoration:line-through;color:var(--muted)}
+  li .x{border:0;background:none;color:var(--muted);cursor:pointer;font-size:16px;opacity:.5}
+  li .x:hover{opacity:1;color:var(--accent)}
+  .empty{font-size:12px;color:var(--muted);padding:6px 2px}
+  footer{text-align:center;font-size:11px;color:var(--muted);margin-top:22px}
+  kbd{border:1px solid var(--line);border-radius:4px;padding:1px 5px;background:var(--card)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Tomato<span>.</span></h1>
+    <div class="count" id="count">0 sessions today</div>
+  </header>
+
+  <div class="modes" id="modes">
+    <button data-mode="focus" class="on">Focus · 25</button>
+    <button data-mode="short">Short · 5</button>
+    <button data-mode="long">Long · 15</button>
+  </div>
+
+  <div class="dial">
+    <svg viewBox="0 0 120 120">
+      <circle class="track" cx="60" cy="60" r="54"/>
+      <circle class="prog" id="prog" cx="60" cy="60" r="54"/>
+    </svg>
+    <div class="time"><b id="clock">25:00</b><small id="label">Time to focus</small></div>
+  </div>
+
+  <div class="controls">
+    <button id="reset">Reset</button>
+    <button class="main" id="start">Start</button>
+    <button id="skip">Skip</button>
+  </div>
+
+  <section class="panel">
+    <h2>What are you working on?</h2>
+    <form id="form">
+      <input id="task" placeholder="Add a task…" maxlength="80" autocomplete="off">
+      <button aria-label="Add task">+</button>
+    </form>
+    <ul id="list"></ul>
+  </section>
+
+  <footer>Press <kbd>Space</kbd> to start / pause</footer>
+</div>
+
+<script>
+const MODES = {
+  focus:{mins:25,label:'Time to focus'},
+  short:{mins:5, label:'Take a breather'},
+  long: {mins:15,label:'Long break — stretch!'}
+};
+const R = 54, C = 2*Math.PI*R;
+const $ = id => document.getElementById(id);
+const prog = $('prog'); prog.style.strokeDasharray = C;
+
+let mode='focus', total=MODES.focus.mins*60, left=total, timer=null, sessions=0, audio=null;
+
+const store = {
+  get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}
+};
+
+function render(){
+  const m=String(Math.floor(left/60)).padStart(2,'0'), s=String(left%60).padStart(2,'0');
+  $('clock').textContent=`${m}:${s}`;
+  prog.style.strokeDashoffset = C*(1-left/total);
+  document.title = timer ? `${m}:${s} · Tomato` : 'Tomato — Focus Timer';
+  $('start').textContent = timer ? 'Pause' : (left<total ? 'Resume' : 'Start');
+  $('count').textContent = `${sessions} session${sessions===1?'':'s'} today`;
+}
+
+function setMode(m){
+  stop(); mode=m; total=left=MODES[m].mins*60;
+  document.body.className = m==='focus'?'':m;
+  $('label').textContent = MODES[m].label;
+  document.querySelectorAll('#modes button').forEach(b=>b.classList.toggle('on',b.dataset.mode===m));
+  render();
+}
+
+function chime(){
+  if(!audio) return;
+  [0,0.25,0.5].forEach((t,i)=>{
+    const o=audio.createOscillator(), g=audio.createGain();
+    o.frequency.value=[660,880,990][i]; o.connect(g); g.connect(audio.destination);
+    const at=audio.currentTime+t;
+    g.gain.setValueAtTime(.2,at); g.gain.exponentialRampToValueAtTime(.001,at+.4);
+    o.start(at); o.stop(at+.4);
+  });
+}
+
+function finish(){
+  stop(); chime();
+  if(mode==='focus'){
+    sessions++; store.set('tomato-sessions',{day:new Date().toDateString(),n:sessions});
+    setMode(sessions%4===0?'long':'short');
+  } else setMode('focus');
+}
+
+function start(){
+  try{ audio = audio || new (window.AudioContext||window.webkitAudioContext)(); audio.resume(); }catch{}
+  const end = Date.now()+left*1000;
+  timer = setInterval(()=>{
+    left = Math.max(0, Math.round((end-Date.now())/1000));
+    render(); if(left===0) finish();
+  },250);
+  render();
+}
+function stop(){ clearInterval(timer); timer=null; render(); }
+function toggle(){ timer ? stop() : start(); }
+
+$('start').onclick=toggle;
+$('reset').onclick=()=>setMode(mode);
+$('skip').onclick=finish;
+$('modes').onclick=e=>{ if(e.target.dataset.mode) setMode(e.target.dataset.mode); };
+document.addEventListener('keydown',e=>{
+  if(e.code==='Space' && e.target.tagName!=='INPUT'){ e.preventDefault(); toggle(); }
+});
+
+// tasks
+let tasks = store.get('tomato-tasks',[]);
+function drawTasks(){
+  const ul=$('list'); ul.innerHTML='';
+  if(!tasks.length){ ul.innerHTML='<li class="empty">No tasks yet — add one above.</li>'; return; }
+  tasks.forEach((t,i)=>{
+    const li=document.createElement('li'); if(t.done) li.className='done';
+    const cb=document.createElement('input'); cb.type='checkbox'; cb.checked=t.done;
+    cb.onchange=()=>{ t.done=cb.checked; save(); };
+    const sp=document.createElement('span'); sp.textContent=t.text;
+    const x=document.createElement('button'); x.className='x'; x.textContent='×'; x.setAttribute('aria-label','Delete');
+    x.onclick=()=>{ tasks.splice(i,1); save(); };
+    li.append(cb,sp,x); ul.append(li);
+  });
+}
+function save(){ store.set('tomato-tasks',tasks); drawTasks(); }
+$('form').onsubmit=e=>{
+  e.preventDefault(); const v=$('task').value.trim();
+  if(v){ tasks.push({text:v,done:false}); $('task').value=''; save(); }
+};
+
+const saved = store.get('tomato-sessions',null);
+if(saved && saved.day===new Date().toDateString()) sessions=saved.n;
+drawTasks(); render();
+</script>
+</body>
+</html>

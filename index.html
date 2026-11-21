@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhd Nur Aiman — Builds web apps with AI</title>
+<meta name="description" content="Portfolio of Muhd Nur Aiman Bin Rahsid. Small, useful web apps built with AI and shipped live.">
+<meta property="og:title" content="Muhd Nur Aiman — Builds web apps with AI">
+<meta property="og:description" content="Small, useful web apps built with AI and shipped live. Click any project and try it.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#f6efe4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23d9472b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6efe4; --ink:#2a1d17; --muted:#7d6a5c; --line:#e3d6c4;
+    --card:#fffaf2; --accent:#d9472b; --accent-ink:#fff;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#17110e; --ink:#f3e9dc; --muted:#a8968a; --line:#33271f;
+      --card:#201814; --accent:#ee6a4d; --accent-ink:#17110e;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    background:var(--bg);color:var(--ink);line-height:1.65;font-size:15px;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px}
+  .serif{font-family:'Fraunces',Georgia,serif}
+
+  /* nav */
+  nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+  .logo{font-family:'Fraunces',serif;font-weight:700;font-size:20px;text-decoration:none}
+  .logo span{color:var(--accent)}
+  nav ul{display:flex;gap:22px;list-style:none;font-size:13px}
+  nav a{text-decoration:none;color:var(--muted);transition:color .2s}
+  nav a:hover{color:var(--ink)}
+
+  /* hero */
+  .hero{padding:72px 0 64px}
+  .eyebrow{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:22px}
+  h1{
+    font-family:'Fraunces',serif;font-weight:600;letter-spacing:-1.5px;line-height:1.05;
+    font-size:clamp(38px,7.5vw,68px);max-width:14em;
+  }
+  h1 em{font-style:italic;color:var(--accent)}
+  .lede{margin-top:26px;max-width:34em;color:var(--muted);font-size:16px}
+  .lede strong{color:var(--ink);font-weight:600}
+  .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+  .btn{
+    display:inline-block;text-decoration:none;font-size:13px;font-weight:600;
+    padding:13px 22px;border-radius:12px;border:1px solid var(--ink);transition:transform .15s, background .2s;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn.primary{background:var(--ink);color:var(--bg)}
+  .btn.ghost{background:transparent;color:var(--ink)}
+
+  /* sections */
+  section{padding:56px 0;border-top:1px solid var(--line)}
+  .label{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  h2{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(26px,4.5vw,36px);letter-spacing:-.8px;margin-bottom:30px}
+
+  /* projects */
+  .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;
+    display:flex;flex-direction:column;transition:transform .2s, border-color .2s;
+  }
+  .card:hover{transform:translateY(-4px);border-color:var(--accent)}
+  .thumb{
+    aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;
+    background:var(--bg);border-bottom:1px solid var(--line);
+  }
+  .thumb svg{width:46%;height:auto}
+  .thumb.soon{color:var(--muted);font-size:12px;letter-spacing:2px;text-transform:uppercase;
+    background:repeating-linear-gradient(45deg,transparent 0 10px,var(--line) 10px 11px)}
+  .body{padding:20px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .body h3{font-family:'Fraunces',serif;font-size:22px;font-weight:600;letter-spacing:-.4px}
+  .body p{color:var(--muted);font-size:13.5px;flex:1}
+  .tags{display:flex;flex-wrap:wrap;gap:6px}
+  .tags span{font-size:11px;padding:3px 9px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+  .links{display:flex;gap:16px;font-size:13px;font-weight:600;margin-top:4px}
+  .links a{text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:1px}
+  .links a:hover{color:var(--accent)}
+  .card.soon .body h3{color:var(--muted)}
+
+  /* process */
+  .steps{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));counter-reset:s}
+  .step{counter-increment:s;padding-top:16px;border-top:2px solid var(--ink)}
+  .step::before{content:"0" counter(s);font-size:12px;color:var(--accent);font-weight:600}
+  .step h3{font-family:'Fraunces',serif;font-size:20px;font-weight:600;margin:6px 0}
+  .step p{color:var(--muted);font-size:13.5px}
+
+  /* about + contact */
+  .about p{max-width:38em;margin-bottom:14px;color:var(--muted)}
+  .about p.intro{color:var(--ink);font-size:17px}
+  .contact-list{list-style:none;display:grid;gap:12px;font-size:15px}
+  .contact-list a{text-decoration:none;border-bottom:2px solid var(--accent)}
+  .contact-list a:hover{color:var(--accent)}
+  .contact-list small{display:inline-block;width:92px;color:var(--muted);font-size:12px;letter-spacing:1.5px;text-transform:uppercase}
+
+  footer{padding:30px 0 50px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  @media (max-width:520px){
+    nav ul{gap:14px}
+    .hero{padding:44px 0 48px}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <a class="logo" href="#top">Aiman<span>.</span></a>
+    <ul>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero" id="top">
+    <p class="eyebrow">Web builder · AI-assisted</p>
+    <h1>I turn ideas into <em>working</em> web apps, with AI as my co-pilot.</h1>
+    <p class="lede">
+      Hi, I'm <strong>Muhd Nur Aiman Bin Rahsid</strong>. I build small, useful tools and ship them live.
+      Every project below is something you can open and use right now.
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="#projects">See my projects</a>
+      <a class="btn ghost" href="https://github.com/manorazali" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </header>
+
+  <section id="projects">
+    <p class="label">Selected work</p>
+    <h2>Projects</h2>
+    <div class="grid">
+
+      <article class="card">
+        <div class="thumb" aria-hidden="true">
+          <svg viewBox="0 0 120 120" fill="none">
+            <circle cx="60" cy="60" r="54" stroke="var(--line)" stroke-width="9"/>
+            <circle cx="60" cy="60" r="54" stroke="var(--accent)" stroke-width="9" stroke-linecap="round"
+                    stroke-dasharray="339" stroke-dashoffset="100" transform="rotate(-90 60 60)"/>
+            <text x="60" y="68" text-anchor="middle" font-family="Fraunces, serif" font-size="26" fill="currentColor">25:00</text>
+          </svg>
+        </div>
+        <div class="body">
+          <h3>Tomato</h3>
+          <p>A Pomodoro focus timer with a built-in task list. Switches between focus and break modes, chimes when time is up, and remembers your tasks.</p>
+          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Built with AI</span></div>
+          <div class="links">
+            <a href="tomato/">Live demo ↗</a>
+            <a href="https://github.com/manorazali/manorazali.github.io/tree/main/tomato" target="_blank" rel="noopener">Code ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card soon">
+        <div class="thumb soon">In progress</div>
+        <div class="body">
+          <h3>Live data dashboard</h3>
+          <p>Weather or crypto prices pulled from a public API, with charts that update in real time.</p>
+          <div class="tags"><span>API</span><span>Charts</span></div>
+        </div>
+      </article>
+
+      <article class="card soon">
+        <div class="thumb soon">Coming next</div>
+        <div class="body">
+          <h3>Markdown notes app</h3>
+          <p>Write notes in Markdown, search them instantly, and keep everything saved in the browser.</p>
+          <div class="tags"><span>Markdown</span><span>Search</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="process">
+    <p class="label">How I work</p>
+    <h2>From idea to live link</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>Start with the problem</h3>
+        <p>I pick one small thing that's annoying or useful and define what "done" looks like before writing anything.</p>
+      </div>
+      <div class="step">
+        <h3>Build with AI, review by hand</h3>
+        <p>I direct the AI with clear prompts, then test the result myself and iterate until it feels right.</p>
+      </div>
+      <div class="step">
+        <h3>Ship it live</h3>
+        <p>Every project gets a public link and a GitHub repo so anyone can try it or read the code.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <p class="label">About</p>
+    <h2>A bit about me</h2>
+    <p class="intro">I'm Aiman, and I'm learning to build real software by shipping real projects.</p>
+    <p>I use AI coding tools to move fast, and I focus on the parts that matter: clear ideas, careful testing and clean results. This portfolio grows with me, with a new project added regularly.</p>
+    <p>Open to internships, freelance projects and collaboration.</p>
+  </section>
+
+  <section id="contact">
+    <p class="label">Contact</p>
+    <h2>Let's build something</h2>
+    <ul class="contact-list">
+      <li><small>Email</small><a href="mailto:YOUR-EMAIL@example.com">YOUR-EMAIL@example.com</a></li>
+      <li><small>GitHub</small><a href="https://github.com/manorazali" target="_blank" rel="noopener">github.com/manorazali</a></li>
+      <li><small>LinkedIn</small><a href="https://www.linkedin.com/in/YOUR-PROFILE" target="_blank" rel="noopener">linkedin.com/in/YOUR-PROFILE</a></li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>© <span id="yr">2026</span> Muhd Nur Aiman Bin Rahsid</span>
+    <span>Built with AI · Hosted on GitHub Pages</span>
+  </footer>
+
+</div>
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
