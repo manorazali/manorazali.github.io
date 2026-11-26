@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuoteKit — Quotations & Invoices</title>
+<meta name="description" content="QuoteKit: create quotations and invoices, convert a quote to an invoice, track what is paid and print a clean PDF. Your data stays in your browser.">
+<meta name="theme-color" content="#eef3fb">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='5' y='3' width='22' height='26' rx='4' fill='%232563eb'/%3E%3Crect x='10' y='9' width='12' height='3' rx='1.5' fill='white'/%3E%3Crect x='10' y='15' width='12' height='2.5' rx='1.2' fill='white' opacity='.7'/%3E%3Crect x='10' y='21' width='8' height='2.5' rx='1.2' fill='white' opacity='.7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="app-head no-print">
+  <a class="brand" href="#/">QuoteKit<span>.</span></a>
+  <nav aria-label="Main">
+    <a href="#/" id="nav-docs">Documents</a>
+    <a href="#/settings" id="nav-settings">Settings</a>
+  </nav>
+  <a class="back" href="../">← Back to portfolio</a>
+</header>
+
+<main id="app" tabindex="-1"></main>
+<div class="toast no-print" id="toast" role="status" aria-live="polite"></div>
+<noscript><p style="padding:20px">QuoteKit needs JavaScript to run.</p></noscript>
+
+<script src="lib/calc.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

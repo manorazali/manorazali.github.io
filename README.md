@@ -1,41 +1,33 @@
-# Portfolio — Muhd Nur Aiman Bin Rahsid
+# Portfolio: Muhd Nur Aiman Bin Rahsid
 
-One-page portfolio, hosted free on GitHub Pages.
+Programmer and freelance vibecoder. Live site: https://manorazali.github.io
 
 ```
-index.html        ← portfolio landing page
-tomato/index.html ← Project 1: Tomato focus timer
-notes/index.html  ← Project 2: Notable markdown notes app
-weather/index.html← Project 3: Skyline live weather dashboard
-README.md
+index.html           portfolio home page
+quotekit/            QuoteKit: quotation and invoice maker (featured project, has tests)
+weather/             Skyline: live weather dashboard
+notes/               Notable: Markdown notes app
+tomato/              Tomato: Pomodoro focus timer
 ```
 
-## Before you publish: replace 4 placeholders
+Every project is plain HTML, CSS and JavaScript with no build step, hosted free on GitHub Pages.
 
-Open `index.html` and search for these (Ctrl/Cmd + F):
+## Update the live site
 
-| Search for | Replace with |
-|---|---|
-| `manorazali` | your GitHub username (appears 5 times) |
-| `YOUR-EMAIL@example.com` | your real email (appears 2 times) |
-| `YOUR-PROFILE` | your LinkedIn profile name (appears 2 times) |
+1. Open the repository `manorazali.github.io` on GitHub.
+2. Click **Add file → Upload files** and drag in the files or folders that changed. Uploading a folder with the same name replaces the old one.
+3. Click **Commit changes** and wait about a minute.
+4. Refresh the site. If you still see the old version, hard-refresh with Ctrl+Shift+R.
 
-Tip: if you don't want a LinkedIn link yet, delete that `<li>` line.
+## Run the QuoteKit tests
 
-## Publish on GitHub Pages
+```bash
+cd quotekit
+node --test
+```
 
-1. Sign in at github.com and click **New repository**.
-2. Name it **exactly** `manorazali.github.io` (same username as your account). Set it to **Public**.
-3. Click **uploading an existing file**, drag in `index.html`, the `tomato` folder and `README.md`, then **Commit changes**.
-4. Go to **Settings → Pages**. Under *Build and deployment*, set Source to **Deploy from a branch**, branch **main**, folder **/ (root)**, and Save.
-5. Wait about a minute. Your site is live at `https://manorazali.github.io`, and Tomato is at `https://manorazali.github.io/tomato/`.
+## Add a new project
 
-## Adding your next project
-
-1. Put it in a new folder, for example `dashboard/index.html`.
-2. In `index.html`, copy the Tomato `<article class="card">` block, paste it in the projects grid, and edit the title, text and links.
-3. Delete the matching "In progress" card, commit, and push. GitHub redeploys automatically.
-
-## Later: custom domain
-
-Buy a domain, then in **Settings → Pages → Custom domain** enter it and follow the DNS instructions GitHub shows. HTTPS is automatic.
+1. Put it in its own folder with an `index.html`.
+2. Copy one of the project cards in `index.html`, then change the name, text and links.
+3. Upload and commit as above.
