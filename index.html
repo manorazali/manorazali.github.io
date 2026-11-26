@@ -3,259 +3,322 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Muhd Nur Aiman — Builds web apps with AI</title>
-<meta name="description" content="Portfolio of Muhd Nur Aiman Bin Rahsid. Small, useful web apps built with AI and shipped live.">
-<meta property="og:title" content="Muhd Nur Aiman — Builds web apps with AI">
-<meta property="og:description" content="Small, useful web apps built with AI and shipped live. Click any project and try it.">
-<meta property="og:type" content="website">
+<title>Muhd Nur Aiman — Websites & web tools for small businesses</title>
+<meta name="description" content="Programmer and freelance vibecoder. I build websites and simple web tools for small businesses. Try the live projects: quotation and invoice maker, weather dashboard, notes app.">
+<meta name="author" content="Muhd Nur Aiman Bin Rahsid">
 <meta name="theme-color" content="#eef3fb">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://manorazali.github.io/">
+<meta property="og:title" content="Muhd Nur Aiman — Websites & web tools for small businesses">
+<meta property="og:description" content="Programmer and freelance vibecoder. Try the live projects: a quotation and invoice maker, a weather dashboard and more.">
+<meta property="og:image" content="https://manorazali.github.io/quotekit/preview.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%232563eb'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#eef3fb; --ink:#14213d; --muted:#5b6b86; --line:#d6e0f0;
-    --card:#fafcff; --accent:#2563eb; --accent-ink:#fff;
+    color-scheme:light;
+    --bg:#eef3fb; --surface:#fafcff; --ink:#14213d; --muted:#52617d; --faint:#6b7b97;
+    --line:#d6e0f0; --soft:#e2ebfa; --accent:#2563eb; --accent-ink:#fff; --accent-soft:#dbe7fd;
   }
   @media (prefers-color-scheme: dark){
     :root{
-      --bg:#0d1424; --ink:#e6edf8; --muted:#8fa0bd; --line:#1f2b45;
-      --card:#141d33; --accent:#5b9bff; --accent-ink:#0d1424;
+      color-scheme:dark;
+      --bg:#0d1424; --surface:#141d33; --ink:#e6edf8; --muted:#aebad1; --faint:#8fa0bd;
+      --line:#24304d; --soft:#1a2644; --accent:#5b9bff; --accent-ink:#0d1424; --accent-soft:#1d3a6b;
     }
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:'JetBrains Mono',ui-monospace,monospace;
-    background:var(--bg);color:var(--ink);line-height:1.65;font-size:15px;
-    -webkit-font-smoothing:antialiased;
-  }
+  html{scroll-behavior:smooth;scroll-padding-top:76px}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
   a{color:inherit}
-  .wrap{max-width:880px;margin:0 auto;padding:0 22px}
-  .serif{font-family:'Fraunces',Georgia,serif}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+  .skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:8px;z-index:100}
+  .skip:focus{left:12px}
 
   /* nav */
-  nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
-  .logo{font-family:'Fraunces',serif;font-weight:700;font-size:20px;text-decoration:none}
+  .nav{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid transparent}
+  .nav .wrap{display:flex;align-items:center;gap:24px;height:64px}
+  .logo{font-family:'Fraunces',serif;font-weight:700;font-size:22px;letter-spacing:-.5px;text-decoration:none}
   .logo span{color:var(--accent)}
-  nav ul{display:flex;gap:22px;list-style:none;font-size:13px}
-  nav a{text-decoration:none;color:var(--muted);transition:color .2s}
-  nav a:hover{color:var(--ink)}
+  .nav ul{display:flex;gap:6px;list-style:none;margin-left:auto}
+  .nav li a{display:block;padding:8px 12px;border-radius:9px;text-decoration:none;font-size:14.5px;color:var(--muted);font-weight:500}
+  .nav li a:hover{background:var(--soft);color:var(--ink)}
+  .nav .cta-link{background:var(--accent);color:var(--accent-ink);font-weight:600}
+  .nav .cta-link:hover{background:var(--accent);color:var(--accent-ink);filter:brightness(1.08)}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:15px;padding:13px 22px;border-radius:12px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;font-family:inherit;transition:transform .15s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+  .btn.quiet{border-color:var(--line);background:var(--surface);font-weight:500}
+  .btn.sm{padding:9px 16px;font-size:14px}
 
   /* hero */
-  .hero{padding:72px 0 64px}
-  .eyebrow{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:22px}
-  h1{
-    font-family:'Fraunces',serif;font-weight:600;letter-spacing:-1.5px;line-height:1.05;
-    font-size:clamp(38px,7.5vw,68px);max-width:14em;
-  }
-  h1 em{font-style:italic;color:var(--accent)}
-  .lede{margin-top:26px;max-width:34em;color:var(--muted);font-size:16px}
+  .hero{padding:84px 0 56px}
+  .eyebrow{font-size:13px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+  h1{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-1.6px;line-height:1.06;font-size:clamp(38px,6.6vw,66px);max-width:14em}
+  .lede{margin-top:24px;max-width:36em;color:var(--muted);font-size:18px}
   .lede strong{color:var(--ink);font-weight:600}
-  .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
-  .btn{
-    display:inline-block;text-decoration:none;font-size:13px;font-weight:600;
-    padding:13px 22px;border-radius:12px;border:1px solid var(--ink);transition:transform .15s, background .2s;
-  }
-  .btn:hover{transform:translateY(-2px)}
-  .btn.primary{background:var(--ink);color:var(--bg)}
-  .btn.ghost{background:transparent;color:var(--ink)}
+  .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+  .proof{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:40px;padding-top:24px;border-top:1px solid var(--line);list-style:none;font-size:14.5px;color:var(--muted)}
+  .proof li::before{content:"✓";color:var(--accent);font-weight:700;margin-right:8px}
 
   /* sections */
-  section{padding:56px 0;border-top:1px solid var(--line)}
-  .label{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-  h2{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(26px,4.5vw,36px);letter-spacing:-.8px;margin-bottom:30px}
+  section{padding:64px 0}
+  .label{font-size:13px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+  h2{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-.9px;line-height:1.15;font-size:clamp(28px,4.4vw,40px);margin-bottom:14px}
+  .intro{color:var(--muted);max-width:40em;margin-bottom:34px}
 
-  /* projects */
+  /* featured project */
+  .feature{display:grid;gap:36px;grid-template-columns:minmax(0,5fr) minmax(0,6fr);align-items:center}
+  .feature h3{font-family:'Fraunces',serif;font-size:30px;letter-spacing:-.6px;line-height:1.15;margin-bottom:12px}
+  .badge{display:inline-block;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:4px 11px;border-radius:999px;margin-bottom:14px}
+  .feature p{color:var(--muted)}
+  .feature h4{font-size:14px;margin:22px 0 8px}
+  .ticks{list-style:none;display:grid;gap:7px;color:var(--muted);font-size:15px}
+  .ticks li{padding-left:24px;position:relative}
+  .ticks li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:700}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin:20px 0 4px}
+  .tags span{font-size:12.5px;padding:3px 11px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:var(--surface)}
+  .feature .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .shot{display:block;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface);box-shadow:0 18px 50px #14213d1a;transition:transform .2s}
+  .shot:hover{transform:translateY(-3px)}
+  .shot-bar{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--soft)}
+  .shot-bar i{width:10px;height:10px;border-radius:50%;background:var(--line);display:block}
+  .shot img{display:block;width:100%;height:auto}
+  .shot-note{font-size:12.5px;color:var(--faint);margin-top:10px;text-align:center}
+
+  /* other projects */
   .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-  .card{
-    background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;
-    display:flex;flex-direction:column;transition:transform .2s, border-color .2s;
-  }
-  .card:hover{transform:translateY(-4px);border-color:var(--accent)}
-  .thumb{
-    aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;
-    background:var(--bg);border-bottom:1px solid var(--line);
-  }
-  .thumb svg{width:46%;height:auto}
-  .thumb.soon{color:var(--muted);font-size:12px;letter-spacing:2px;text-transform:uppercase;
-    background:repeating-linear-gradient(45deg,transparent 0 10px,var(--line) 10px 11px)}
-  .body{padding:20px;display:flex;flex-direction:column;gap:10px;flex:1}
-  .body h3{font-family:'Fraunces',serif;font-size:22px;font-weight:600;letter-spacing:-.4px}
-  .body p{color:var(--muted);font-size:13.5px;flex:1}
-  .tags{display:flex;flex-wrap:wrap;gap:6px}
-  .tags span{font-size:11px;padding:3px 9px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
-  .links{display:flex;gap:16px;font-size:13px;font-weight:600;margin-top:4px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px;transition:transform .2s,border-color .2s}
+  .card:hover{transform:translateY(-3px);border-color:var(--accent)}
+  .card .icon{width:46px;height:46px;border-radius:12px;background:var(--accent-soft);display:grid;place-items:center;margin-bottom:4px}
+  .card .icon svg{width:26px;height:26px}
+  .card h3{font-size:19px;letter-spacing:-.2px}
+  .card p{color:var(--muted);font-size:15px;flex:1}
+  .links{display:flex;gap:18px;font-size:14.5px;font-weight:600;margin-top:6px}
   .links a{text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:1px}
   .links a:hover{color:var(--accent)}
-  .card.soon .body h3{color:var(--muted)}
 
-  /* process */
-  .steps{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));counter-reset:s}
-  .step{counter-increment:s;padding-top:16px;border-top:2px solid var(--ink)}
-  .step::before{content:"0" counter(s);font-size:12px;color:var(--accent);font-weight:600}
-  .step h3{font-family:'Fraunces',serif;font-size:20px;font-weight:600;margin:6px 0}
-  .step p{color:var(--muted);font-size:13.5px}
+  /* services + process */
+  .steps{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));counter-reset:s}
+  .step{counter-increment:s;padding-top:18px;border-top:2px solid var(--ink)}
+  .step::before{content:"0" counter(s);font-size:13px;font-weight:600;color:var(--accent)}
+  .step h3{font-size:18px;margin:6px 0 4px}
+  .step p{color:var(--muted);font-size:15px}
+  .note{margin-top:28px;color:var(--muted)}
 
   /* about + contact */
-  .about p{max-width:38em;margin-bottom:14px;color:var(--muted)}
-  .about p.intro{color:var(--ink);font-size:17px}
-  .contact-list{list-style:none;display:grid;gap:12px;font-size:15px}
-  .contact-list a{text-decoration:none;border-bottom:2px solid var(--accent)}
-  .contact-list a:hover{color:var(--accent)}
-  .contact-list small{display:inline-block;width:92px;color:var(--muted);font-size:12px;letter-spacing:1.5px;text-transform:uppercase}
+  .about{display:grid;gap:30px;grid-template-columns:minmax(0,3fr) minmax(0,2fr);align-items:start}
+  .about p{color:var(--muted);margin-bottom:14px;max-width:38em}
+  .about p.lead{color:var(--ink);font-size:19px}
+  .facts{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;list-style:none;display:grid;gap:12px;font-size:15px}
+  .facts b{display:block;font-size:12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--faint);font-weight:600}
+  .contact{background:var(--ink);color:var(--bg);border-radius:24px;padding:48px 36px;text-align:center}
+  .contact h2{margin-bottom:10px}
+  .contact p{max-width:34em;margin:0 auto 24px;opacity:.85}
+  .contact .btn{border-color:var(--bg);color:var(--bg)}
+  .contact .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+  .contact .row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+  .contact .mail{margin-top:20px;font-size:15px;opacity:.9;word-break:break-all}
+  .contact .mail a{text-underline-offset:3px}
+  footer{padding:36px 0 56px;color:var(--faint);font-size:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
 
-  footer{padding:30px 0 50px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-
-  @media (max-width:520px){
-    nav ul{gap:14px}
-    .hero{padding:44px 0 48px}
+  @media (max-width:820px){
+    .feature,.about{grid-template-columns:1fr}
+    .hero{padding:56px 0 40px}
+    section{padding:48px 0}
+    .nav ul li:not(:last-child){display:none}
+    .contact{padding:36px 22px}
   }
-  @media (prefers-reduced-motion: reduce){
-    *{transition:none!important;scroll-behavior:auto!important}
-  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<div class="wrap">
+<a class="skip" href="#work">Skip to projects</a>
 
-  <nav>
-    <a class="logo" href="#top">Manorazali<span>.</span></a>
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="#top">Aiman<span>.</span></a>
     <ul>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#process">Process</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">How it works</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a class="cta-link" href="#contact">Contact</a></li>
     </ul>
-  </nav>
+  </div>
+</nav>
 
-  <header class="hero" id="top">
-    <p class="eyebrow">Web builder · AI-assisted</p>
-    <h1>I turn ideas into <em>working</em> web apps, with AI as my co-pilot.</h1>
-    <p class="lede">
-      Hi, I'm <strong>Muhd Nur Aiman Bin Rahsid</strong>. I build small, useful tools and ship them live.
-      Every project below is something you can open and use right now.
-    </p>
-    <div class="cta">
-      <a class="btn primary" href="#projects">See my projects</a>
-      <a class="btn ghost" href="https://github.com/manorazali" target="_blank" rel="noopener">GitHub ↗</a>
-    </div>
-  </header>
+<main id="top">
+  <div class="wrap">
 
-  <section id="projects">
-    <p class="label">Selected work</p>
-    <h2>Projects</h2>
-    <div class="grid">
+    <header class="hero">
+      <p class="eyebrow">Programmer · Freelance vibecoder</p>
+      <h1>Websites and web tools that help your business run smoother.</h1>
+      <p class="lede">I'm <strong>Muhd Nur Aiman</strong>. I turn your idea into a working website or app, built fast with AI tools and then tested by hand.</p>
+      <div class="cta">
+        <a class="btn primary" href="#work">See my work</a>
+        <a class="btn" href="#contact">Get in touch</a>
+      </div>
+      <ul class="proof">
+        <li>4 live projects you can try now</li>
+        <li>Code is public on GitHub</li>
+        <li>No sign-up needed for any demo</li>
+      </ul>
+    </header>
 
-      <article class="card">
-        <div class="thumb" aria-hidden="true">
-          <svg viewBox="0 0 120 120" fill="none">
-            <circle cx="60" cy="60" r="54" stroke="var(--line)" stroke-width="9"/>
-            <circle cx="60" cy="60" r="54" stroke="var(--accent)" stroke-width="9" stroke-linecap="round"
-                    stroke-dasharray="339" stroke-dashoffset="100" transform="rotate(-90 60 60)"/>
-            <text x="60" y="68" text-anchor="middle" font-family="Fraunces, serif" font-size="26" fill="currentColor">25:00</text>
-          </svg>
-        </div>
-        <div class="body">
-          <h3>Tomato</h3>
-          <p>A Pomodoro focus timer with a built-in task list. Switches between focus and break modes, chimes when time is up, and remembers your tasks.</p>
-          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Built with AI</span></div>
-          <div class="links">
-            <a href="tomato/">Live demo ↗</a>
-            <a href="https://github.com/manorazali/manorazali.github.io/tree/main/tomato" target="_blank" rel="noopener">Code ↗</a>
+    <section id="work" aria-labelledby="work-h">
+      <p class="label">Featured project</p>
+      <h2 id="work-h">A real tool, not just a pretty page</h2>
+      <p class="intro">Small businesses often make quotes and invoices in Word or Excel. I built QuoteKit to show how a simple tool can replace that, from the first quote to the paid invoice.</p>
+
+      <div class="feature">
+        <div>
+          <span class="badge">MVP · simple and useful</span>
+          <h3>QuoteKit: quotations and invoices for small businesses</h3>
+          <p>Create a quotation, send it, turn it into an invoice and keep track of what is paid, all in one place.</p>
+          <h4>What it does</h4>
+          <ul class="ticks">
+            <li>Quotations and invoices with automatic numbering</li>
+            <li>Turns an accepted quote into an invoice in one click</li>
+            <li>Tracks Draft, Sent and Paid, and flags overdue invoices</li>
+            <li>Prints or saves a clean PDF</li>
+            <li>Backs up your data. Nothing leaves your device.</li>
+          </ul>
+          <h4>Built with care</h4>
+          <ul class="ticks">
+            <li>Money is calculated in whole sen, so totals never show rounding errors</li>
+            <li>Automated tests check the calculations and the backup import</li>
+            <li>Works on phone and desktop, in light and dark mode</li>
+          </ul>
+          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Automated tests</span><span>Print-ready</span></div>
+          <div class="actions">
+            <a class="btn primary" href="quotekit/">Try the live demo</a>
+            <a class="btn quiet" href="https://github.com/manorazali/manorazali.github.io/tree/main/quotekit" target="_blank" rel="noopener">View the code ↗</a>
           </div>
         </div>
-      </article>
-
-      <article class="card">
-        <div class="thumb" aria-hidden="true">
-          <svg viewBox="0 0 120 120" fill="none">
-            <path d="M12 86 L36 58 L58 70 L82 34 L108 48 L108 100 L12 100 Z" fill="var(--accent)" fill-opacity=".12"/>
-            <path d="M12 86 L36 58 L58 70 L82 34 L108 48" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="82" cy="34" r="6" fill="var(--accent)" stroke="var(--card)" stroke-width="3"/>
-            <line x1="12" y1="100" x2="108" y2="100" stroke="var(--line)" stroke-width="3" stroke-linecap="round"/>
-          </svg>
+        <div>
+          <a class="shot" href="quotekit/" aria-label="Open the QuoteKit demo">
+            <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+            <img src="quotekit/preview.png" width="1280" height="860" loading="lazy" alt="QuoteKit editor: a form on the left and a live preview of the quotation on the right, shown with sample data">
+          </a>
+          <p class="shot-note">Screenshot uses sample data.</p>
         </div>
-        <div class="body">
+      </div>
+    </section>
+
+    <section aria-labelledby="more-h" style="padding-top:8px">
+      <p class="label">More live projects</p>
+      <h2 id="more-h">Small apps, all working</h2>
+      <p class="intro">Each one is live. Open it, click around, and read the code if you like.</p>
+      <div class="grid">
+        <article class="card">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-6 4 3 5-8 4 3"/><path d="M3 21h18"/></svg></div>
           <h3>Skyline</h3>
-          <p>A live weather dashboard for any city: current conditions, hourly temperature and rain charts, and a 7-day outlook. Real data from a public API.</p>
-          <div class="tags"><span>API</span><span>Charts</span><span>JavaScript</span><span>Built with AI</span></div>
-          <div class="links">
-            <a href="weather/">Live demo ↗</a>
-            <a href="https://github.com/manorazali/manorazali.github.io/tree/main/weather" target="_blank" rel="noopener">Code ↗</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="thumb" aria-hidden="true">
-          <svg viewBox="0 0 120 120" fill="none">
-            <rect x="22" y="12" width="76" height="96" rx="10" fill="var(--card)" stroke="var(--line)" stroke-width="5"/>
-            <rect x="36" y="30" width="30" height="8" rx="4" fill="var(--accent)"/>
-            <rect x="36" y="50" width="48" height="5" rx="2.5" fill="var(--line)"/>
-            <rect x="36" y="63" width="42" height="5" rx="2.5" fill="var(--line)"/>
-            <rect x="36" y="76" width="48" height="5" rx="2.5" fill="var(--line)"/>
-            <rect x="36" y="89" width="26" height="5" rx="2.5" fill="var(--line)"/>
-          </svg>
-        </div>
-        <div class="body">
+          <p>A live weather dashboard for any city, with hourly charts and a 7-day outlook. It reads real data from a public weather service.</p>
+          <div class="links"><a href="weather/">Live demo ↗</a><a href="https://github.com/manorazali/manorazali.github.io/tree/main/weather" target="_blank" rel="noopener">Code ↗</a></div>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div>
           <h3>Notable</h3>
-          <p>A Markdown notes app with live preview, instant search, pinned notes and clickable checklists. Everything is saved in your browser.</p>
-          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Built with AI</span></div>
-          <div class="links">
-            <a href="notes/">Live demo ↗</a>
-            <a href="https://github.com/manorazali/manorazali.github.io/tree/main/notes" target="_blank" rel="noopener">Code ↗</a>
-          </div>
+          <p>A notes app that understands Markdown, with live preview, search, pinned notes and clickable checklists. Notes stay in your browser.</p>
+          <div class="links"><a href="notes/">Live demo ↗</a><a href="https://github.com/manorazali/manorazali.github.io/tree/main/notes" target="_blank" rel="noopener">Code ↗</a></div>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg></div>
+          <h3>Tomato</h3>
+          <p>A focus timer using the Pomodoro method, with a task list. It switches between work and break time and remembers your tasks.</p>
+          <div class="links"><a href="tomato/">Live demo ↗</a><a href="https://github.com/manorazali/manorazali.github.io/tree/main/tomato" target="_blank" rel="noopener">Code ↗</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="services" aria-labelledby="services-h">
+      <p class="label">Services</p>
+      <h2 id="services-h">What I can build for you</h2>
+      <p class="intro">Simple, clear and mobile-friendly, in the style of the projects above.</p>
+      <div class="grid">
+        <article class="card">
+          <h3>Business websites and landing pages</h3>
+          <p>A clear, fast site that explains what you do and makes it easy for customers to contact you.</p>
+        </article>
+        <article class="card">
+          <h3>Custom web tools</h3>
+          <p>Quote makers, calculators, dashboards and forms: small tools that save you time on repeat work.</p>
+        </article>
+        <article class="card">
+          <h3>Ideas into first versions (MVPs)</h3>
+          <p>Have an idea but not sure where to start? I build a simple first version you can test with real people.</p>
+        </article>
+      </div>
+      <p class="note">Not sure what you need? Tell me about your business and I'll suggest a simple place to start.</p>
+    </section>
+
+    <section id="process" aria-labelledby="process-h">
+      <p class="label">How it works</p>
+      <h2 id="process-h">From idea to live site</h2>
+      <div class="steps">
+        <div class="step"><h3>You tell me what you need</h3><p>Your business, your goal, and any examples you like.</p></div>
+        <div class="step"><h3>I build a first version</h3><p>I move quickly with AI tools, so you see something real early.</p></div>
+        <div class="step"><h3>We review and improve</h3><p>I test it myself, then adjust it with your feedback.</p></div>
+        <div class="step"><h3>It goes live</h3><p>I help you publish it online so customers can use it.</p></div>
+      </div>
+    </section>
+
+    <section id="about" aria-labelledby="about-h">
+      <div class="about">
+        <div>
+          <p class="label">About</p>
+          <h2 id="about-h">Hi, I'm Aiman</h2>
+          <p class="lead">I'm a programmer who works as a freelance vibecoder. I build with AI coding tools and stay hands-on: I review the code, test it and fix the details.</p>
+          <p>Every project on this page is live and its code is public, so you can judge my work before we talk.</p>
         </div>
-      </article>
-
-    </div>
-  </section>
-
-  <section id="process">
-    <p class="label">How I work</p>
-    <h2>From idea to live link</h2>
-    <div class="steps">
-      <div class="step">
-        <h3>Start with the problem</h3>
-        <p>I pick one small thing that's annoying or useful and define what "done" looks like before writing anything.</p>
+        <ul class="facts" aria-label="Quick facts">
+          <li><b>Name</b>Muhd Nur Aiman Bin Rahsid</li>
+          <li><b>Role</b>Programmer · freelance vibecoder</li>
+          <li><b>Works with</b>HTML, CSS, JavaScript, AI coding tools</li>
+          <li><b>Evidence</b>4 live projects with public code</li>
+        </ul>
       </div>
-      <div class="step">
-        <h3>Build with AI, review by hand</h3>
-        <p>I direct the AI with clear prompts, then test the result myself and iterate until it feels right.</p>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-h" style="padding-bottom:24px">
+      <div class="contact">
+        <h2 id="contact-h">Tell me about your project</h2>
+        <p>Send a short message about your business and what you need. A few lines is enough to start.</p>
+        <div class="row">
+          <a class="btn primary" href="mailto:aimanmanno@gmail.com?subject=Website%20project%20enquiry&body=Hi%20Aiman%2C%0A%0AMy%20business%3A%0AWhat%20I%20need%3A%0AWhen%20I%20need%20it%20by%3A%0A">Email me</a>
+          <button class="btn" type="button" id="copy">Copy email</button>
+          <a class="btn" href="https://www.linkedin.com/in/muhd-nur-aiman-b64a66128/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a class="btn" href="https://github.com/manorazali" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+        <p class="mail">aimanmanno@gmail.com</p>
       </div>
-      <div class="step">
-        <h3>Ship it live</h3>
-        <p>Every project gets a public link and a GitHub repo so anyone can try it or read the code.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="about" class="about">
-    <p class="label">About</p>
-    <h2>A bit about me</h2>
-    <p class="intro">I'm Aiman, and I'm learning to build real software by shipping real projects.</p>
-    <p>I use AI coding tools to move fast, and I focus on the parts that matter: clear ideas, careful testing and clean results. This portfolio grows with me, with a new project added regularly.</p>
-    <p>Open to internships, freelance projects and collaboration.</p>
-  </section>
+  </div>
+</main>
 
-  <section id="contact">
-    <p class="label">Contact</p>
-    <h2>Let's build something</h2>
-    <ul class="contact-list">
-      <li><small>Email</small><a href="mailto:aimanmanno@gmail.com">aimanmanno@gmail.com</a></li>
-      <li><small>GitHub</small><a href="https://github.com/manorazali" target="_blank" rel="noopener">github.com/manorazali</a></li>
-      <li><small>LinkedIn</small><a href="https://www.linkedin.com/in/muhd-nur-aiman-b64a66128/" target="_blank" rel="noopener">linkedin.com/in/muhd-nur-aiman-b64a66128</a></li>
-    </ul>
-  </section>
-
+<div class="wrap">
   <footer>
     <span>© <span id="yr">2026</span> Muhd Nur Aiman Bin Rahsid</span>
-    <span>Built with AI · Hosted on GitHub Pages</span>
+    <span>Built with AI and checked by hand · Hosted on GitHub Pages</span>
   </footer>
-
 </div>
-<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  var copyBtn = document.getElementById('copy');
+  copyBtn.addEventListener('click', function () {
+    var done = function (ok) { copyBtn.textContent = ok ? 'Copied ✓' : 'Select the email below'; setTimeout(function () { copyBtn.textContent = 'Copy email'; }, 2200); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText('aimanmanno@gmail.com').then(function () { done(true); }, function () { done(false); });
+    else done(false);
+  });
+</script>
 </body>
 </html>
